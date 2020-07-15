@@ -1,0 +1,10 @@
+{
+    "name": "rinjax/mailgun",
+    "version": "0.0.1",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Rinjax\\MailGun\\": "src/"
+        }
+    }
+}
