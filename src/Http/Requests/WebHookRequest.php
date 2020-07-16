@@ -2,25 +2,19 @@
 
 namespace Rinjax\MailGun\Http\Requests;
 
-use Illuminate\Http\Request;
-use Illuminate\Validation\UnauthorizedException;
+use Illuminate\Foundation\Http\FormRequest;
 
-class WebHookRequest extends Request
+class WebHookRequest extends FormRequest
 {
-    public function __construct(array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
+    /*public function __construct(array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
     {
         parent::__construct($query, $request, $attributes, $cookies, $files, $server, $content);
 
         $this->authorize();
 
-    }
+    }*/
 
-    private function authorize()
-    {
-        if(!$this->passesAuthorization()) $this->failedAuthorization();
-    }
-
-    private function passesAuthorization()
+    public function authorize()
     {
         $digest = hash_hmac(
             'sha256',
@@ -31,8 +25,26 @@ class WebHookRequest extends Request
         return ($this->input('signature.signature') === $digest);
     }
 
+    public function rules()
+    {
+        return [];
+    }
+
+    /*private function passesAuthorization()
+    {
+        $digest = hash_hmac(
+            'sha256',
+            $this->input('signature.timestamp') . $this->input('signature.token'),
+            config('services.mailgun.webhook', 'default')
+        );
+
+        dd(config('services.mailgun.webhook', 'default'), $this, $digest);
+
+        return ($this->input('signature.signature') === $digest);
+    }
+
     private function failedAuthorization()
     {
         throw new UnauthorizedException;
-    }
+    }*/
 }
