@@ -6,14 +6,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class WebHookRequest extends FormRequest
 {
-    /*public function __construct(array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
-    {
-        parent::__construct($query, $request, $attributes, $cookies, $files, $server, $content);
 
-        $this->authorize();
-
-    }*/
-
+    /**
+     * Check the signature of the webhook to verify that it was sent from mailgun
+     * @return bool
+     */
     public function authorize()
     {
         $digest = hash_hmac(
@@ -25,26 +22,12 @@ class WebHookRequest extends FormRequest
         return ($this->input('signature.signature') === $digest);
     }
 
+    /**
+     * Just to fullfill FormRequest - not used. 
+     * @return array
+     */
     public function rules()
     {
         return [];
     }
-
-    /*private function passesAuthorization()
-    {
-        $digest = hash_hmac(
-            'sha256',
-            $this->input('signature.timestamp') . $this->input('signature.token'),
-            config('services.mailgun.webhook', 'default')
-        );
-
-        dd(config('services.mailgun.webhook', 'default'), $this, $digest);
-
-        return ($this->input('signature.signature') === $digest);
-    }
-
-    private function failedAuthorization()
-    {
-        throw new UnauthorizedException;
-    }*/
 }
