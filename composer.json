@@ -1,7 +1,11 @@
 {
     "name": "rinjax/mailgun",
-    "version": "0.0.1",
-    "require": {},
+    "version": "0.0.2",
+    "require": {
+        "mailgun/mailgun-php": "^3.0",
+        "nyholm/psr7": "^1.3",
+        "kriswallsmith/buzz": "^1.1"
+    },
     "autoload": {
         "psr-4": {
             "Rinjax\\MailGun\\": "src/"
