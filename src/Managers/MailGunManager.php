@@ -127,7 +127,7 @@ class MailGunManager
      */
     public function tracking(bool $bool = true): MailGunManager
     {
-        $this->PARAMS["o:tracking"] = $bool;
+        $this->PARAMS["o:tracking"] = ($bool) ? 'true' : 'false';
 
         return $this;
     }

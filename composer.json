@@ -1,6 +1,6 @@
 {
     "name": "rinjax/mailgun",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "require": {
         "mailgun/mailgun-php": "^3.0",
         "nyholm/psr7": "^1.3",
